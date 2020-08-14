@@ -1,12 +1,16 @@
-
-def linearSearch(a,key):
+import copy
+def linearSearch(seq,key):
     """시퀀스 a 에서 key와 값이 같은 원소를 선형 검색"""    
-    i=0
+    a=copy.deepcopy(seq)
+    a.append(key)
 
-    for i in range(len(a)):
+    i=0
+    while True:
         if a[i]==key:
-        return i
-    return -1
+            break
+
+        i+=1
+    return -1 if i==len(seq) else i
 
 if __name__=='__main__':
     num=int(input('원소 수를 입력하세요'))
