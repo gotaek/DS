@@ -3,12 +3,10 @@ def linearSearch(a,key):
     """시퀀스 a 에서 key와 값이 같은 원소를 선형 검색"""    
     i=0
 
-    while True:
-        if i==len(a):
-            return -1
+    for i in range(len(a)):
         if a[i]==key:
-            return a[i]
-        i+=1
+        return i
+    return -1
 
 if __name__=='__main__':
     num=int(input('원소 수를 입력하세요'))
