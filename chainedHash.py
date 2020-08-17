@@ -16,7 +16,7 @@ class ChainedsHash:
         self.capacity=capacity
         self.table=[None]*self.capacity
 
-    def Hash_value(self,key:Any)->int:
+    def hash_value(self,key:Any)->int:
         """해시값을 구함"""
         if isinstance(key,int):
             return key%self.capacity
@@ -29,7 +29,7 @@ class ChainedsHash:
 
         while p is not None:
             if p.key==key:
-                retrun p.value
+                return p.value
             p=p.next
         
         return None
@@ -44,7 +44,7 @@ class ChainedsHash:
                 return False
             p=p.next
 
-        temp=Node(key,value,self,table[hash])
+        temp=Node(key,value,self.table[hash])
         self.table[hash]=temp
         return True
 
@@ -60,7 +60,7 @@ class ChainedsHash:
                     self.table[hash]=p.next
                 else:
                     pp.next=p.next
-                retrun True
+                return True
             pp=p
             p=p.next
         return False
