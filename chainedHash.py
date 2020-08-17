@@ -29,7 +29,7 @@ class ChainedsHash:
 
         while p is not None:
             if p.key==key:
-                retrun p.value
+                return p.value
             p=p.next
         
         return None
