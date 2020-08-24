@@ -1,16 +1,23 @@
 from typing import MutableSequence 
 
-def bubble_sort(a:MutableSequence)->None:
-    n=len(a)
-    k=0
-    while k<n-1:
-        last=n-1
-        
-        for j in range (n-1,k,-1):
+def shaker_sort(a:MutableSequence)->None:
+    right=len(a)-1
+    left=0
+    last=right
+    while left<right:    
+        for j in range (right,left,-1):
             if a[j-1]>a[j]:
                 a[j-1],a[j]=a[j],a[j-1]
                 last=j
-        k=last
+        left=last
+
+        for j in range (left,right):
+            if a[j]>a[j+1]:
+                a[j],a[j+1]=a[j+1],a[j]
+                last=j
+        right=last
+        
+        
 
 if __name__=='__main__':
     print('버블 정렬을 수행합니다.')
@@ -20,7 +27,7 @@ if __name__=='__main__':
     for i in range (num):
         x[i]=int(input(f'x[{i}]:'))
 
-    bubble_sort(x)
+    shaker_sort(x)
 
     print('오름차순으로 정렬했습니다.')
     for i in range(num):
