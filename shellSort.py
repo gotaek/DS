@@ -3,6 +3,11 @@ from typing import MutableSequence
 def shell_sort(a:MutableSequence)->None:
     n=len(a)
     h=n//2
+
+
+    while h<n//9:
+        h=h*3+1
+
     while h>0:
         for i in range(h,n):
             j=i-h
@@ -11,11 +16,11 @@ def shell_sort(a:MutableSequence)->None:
                 a[j+h]=a[j]
                 j-=h
             a[j+h]=temp
-        h//=2
+        h//=3
 
 
 if __name__=="__main__":
-    print('셸 정렬을 수행합니다.')
+    print('셸 정렬을 수행합니다.(h*3+1의 수열 사용')
     num=int (input('원소 수를 입력하세요.:'))
     x=[None]*num
 
