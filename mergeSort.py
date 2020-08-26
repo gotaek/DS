@@ -1,39 +1,52 @@
 from typing import Sequence,MutableSequence
 
-def merge_sorted_list(a:Sequence,b:Sequence,c:MutableSequence)->None:
+def merge_sort(a:MutableSequence)->None:
 
-    pa,pb,pc=0,0,0
-    na,nb=len(a),len(b)
+    def _merge_sort(a:MutableSequence, left:int, right:int )->None:
+        if left<right:
+            center=(left+right)//2
 
-    while pa<na and pb<nb:
-        if a[pa]<=b[pb]:
-            c[pc]=a[pa]
-            pa+=1
-        else :
-            c[pc]=b[pb]
-            pb+=1
-        pc+=1
+            _merge_sort(a,left,center)
+            _merge_sort(a,left+1,right)
 
-    while pa<na:
-        c[pc]=a[pa]
-        pa+=1
-        pc+=1
+            p=j=0
+            i=k=left
 
-    while pb<nb:
-        c[pc]=b[pb]
-        pb+=1
-        pc+=1
+            while i <=center:
+                buff[p]=a[i]
+                p+=1
+                i+=1
 
-if __name__=="__main__":
-    a=[2,4,6,8,11]
-    b=[1,2,3,4,9,16,21]
-    c=[None]*(len(a)+len(b))
+            while j<=p and i<=right:
+                if buff[j]<=a[i]:
+                    a[k]=buff[j]
+                    j+=1
+                else:
+                    a[k]=a[i]
+                    i+=1
+                k+=1
 
-    print('정렬을 마친 두 배열의 병합을 수행합니다.')
+            while j<p:
+                a[k]=buff[j]
+                k+=1
+                j+=1
 
-    merge_sorted_list(a,b,c)
+    n=len(a)
+    buff=[None]*n
+    _merge_sort(a,0,n-1)
+    del buff
 
-    print('배열 a와 b를 병합하여 배열c에 저장하였습니다.')
-    print(f'배열 a:{a}')
-    print(f'배열 b:{b}')
-    print(f'배열 c:{c}')
+
+    if __name__=="__main__":
+        print('병합 정렬을 수행합니다.')
+        num=int(input('원소 수를 입력하세요.:'))
+        x=[None]*num
+
+        for i in range(num):
+            x[i]=int(input(f' x[{i}]:'))
+
+        merge_sort(x)
+        
+        print('오름차순으로 정렬했습니다.')
+        for i in range(num):
+            print(f' x[{i}]={x[i]}')
